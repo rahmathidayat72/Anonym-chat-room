@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+if (!extension_loaded('pdo_mysql') && !getenv('ARTISAN_REEXEC')) {
+    putenv('ARTISAN_REEXEC=1');
+    $iniDir = '/etc/php/8.3/cli/conf.d:' . __DIR__;
+    $args = array_map('escapeshellarg', $_SERVER['argv'] ?? []);
+    passthru("PHP_INI_SCAN_DIR={$iniDir} php " . implode(' ', $args), $code);
+    exit($code);
+}
+
+use Illuminate\Foundation\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+define('LARAVEL_START', microtime(true));
+
+require __DIR__.'/vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$status = $app->handleCommand(new ArgvInput);
+
+exit($status);
