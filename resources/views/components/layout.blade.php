@@ -17,7 +17,7 @@
             --tertiary: #5FB5D6;
             --neutral: #161614;
             --surface: #1D1D1B;
-            --violet: #8B5CF6;
+            --bubble: #155266;
             --emerald: #10B981;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
